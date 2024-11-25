@@ -1,17 +1,15 @@
 <!--
-1. Créer un fichier HTML (index.html) et incluez React et React DOM depuis un CDN
+1. Créez un fichier index.html qui inclut React, ReactDOM, et Babel via un CDN. Nous
+allons utiliser Babel pour transpiler le code JSX en JavaScript compréhensible par le
+navigateur.
 
-Lien vers le CDN de React 
-<script
-src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
-<script
-src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></
-script>
+ Lien vers Babel pour compiler JSX
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-2. Utiliser React.createElement(...) pour créer un élément h1 contenant Hello, World !
-3. Utiliser ReactDOM.render(element, document.getElementById('root')); pour rendre
-l’élément.
+2. Dans la balise <script type="text/babel">, vous allez écrire du code JSX pour créer
+un composant React. Par exemple, une simple div avec un contenu.
 
+3. Rendre l’élément créé à l’étape 2.
 -->
 
 <!DOCTYPE html>
@@ -21,7 +19,8 @@ l’élément.
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
-    <title>React avec CDN</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>JSX avec React</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,13 +45,12 @@ l’élément.
 <body>
     <div id="root"></div>
 
-    <script>
-        // Création de l'élément React
-        const element = React.createElement('h1', null, 'Hello, World!');
+    <script type="text/babel">
+        // 1. Définir un élément div avec du texte à l'intérieur
+        const element = <div>Élément JSX rendu avec React !</div>;
         
-        // Rendu
-        const root = document.getElementById('root');
-        ReactDOM.render(element, root);
+        // 2. Rendre l'élément dans le div avec l'id 'root'
+        ReactDOM.createRoot(document.getElementById('root')).render(element);
     </script>
 </body>
 </html>
