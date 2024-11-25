@@ -1,0 +1,59 @@
+<!--
+1. Créer un fichier HTML (index.html) et incluez React et React DOM depuis un CDN
+
+Lien vers le CDN de React 
+----------------------------------------------------
+<script
+src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script
+src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></
+script>
+
+2. Utiliser React.createElement(...) pour créer un élément h1 contenant Hello, World !
+3. Utiliser ReactDOM.render(element, document.getElementById('root')); pour rendre
+l’élément.
+
+-->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <title>React avec CDN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+        }
+        #root {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+        // Création de l'élément React
+        const element = React.createElement('h1', null, 'Hello, World!');
+        
+        // Rendu de l'élément React dans le DOM
+        const root = document.getElementById('root');
+        ReactDOM.render(element, root);
+    </script>
+</body>
+</html>
