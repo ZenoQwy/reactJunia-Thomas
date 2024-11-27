@@ -1,0 +1,120 @@
+<!--
+    1. Créez un fichier index.html qui inclut React, ReactDOM, Babel et votre code
+    React. Nous allons utiliser useEffect dans ce lab.
+
+    2. Créer un composant Timer :
+        a. Créer un composant appelé Timer qui compte les secondes. L'effet
+        secondaire que nous allons gérer est un intervalle qui met à jour l'état
+        seconds toutes les secondes.
+        const interval = setInterval(() => { setSeconds(prevSeconds =>
+        prevSeconds + 1); }, 1000);
+
+    3. Nettoyage de l'effet dans useEffect :
+        a. Dans useEffect, vous devez gérer les effets qui pourraient avoir un impact
+        en dehors du composant, comme un intervalle ou un abonnement à un
+        événement. Utiliser un nettoyage permet de s'assurer que ces effets sont
+        correctement arrêtés lorsque le composant est démonté.
+        clearInterval(interval);
+
+    4. Gérer les dépendances dans useEffect
+        a. Par défaut, useEffect s'exécute après chaque rendu du composant. Vous
+        pouvez contrôler quand l'effet doit s'exécuter en passant un tableau de
+        dépendances.
+
+        b. Si vous voulez que l'effet ne se déclenche que lorsqu'une certaine variable
+        change, vous pouvez ajouter cette variable dans le tableau de dépendances.
+
+    5. Ajouter un bouton qui contrôle le timer Arrêter / Reprendre
+
+-->
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: grey;
+            color: white;
+        }
+
+        #root {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: whitesmoke;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: blue;
+            color: white;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        function Timer() {
+            const [seconds, setSeconds] = React.useState(0);
+            const [isRunning, setIsRunning] = React.useState(false);
+
+            React.useEffect(() => {
+                if (!isRunning) return;
+
+                const interval = setInterval(() => {
+                    setSeconds(prevSeconds => prevSeconds + 1);
+                }, 1000);
+
+                return () => clearInterval(interval);
+            }, [isRunning]); // Dependency
+
+            return (
+                <div>
+                    <h1 style={{color: 'blue'}}>Timer: {seconds} seconds</h1>
+                    <button
+                        className="button"
+                        onClick={() => setIsRunning(!isRunning)}
+                    >
+                        {isRunning ? 'Pause' : 'Reprendre'}
+                    </button>
+                </div>
+            );
+        }
+
+        function App() {
+            return (
+                <div>
+                    <Timer />
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+
+</html>
