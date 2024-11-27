@@ -1,0 +1,112 @@
+<!--
+    1. Créez un fichier index.html dans lequel vous allez intégrer les CDN pour React,
+    ReactDOM, et Babel.
+
+    2. Créer le Context pour le choix de la langue
+
+    3. Implémenter la fonction qui fait le switch de la langue à l’intérieur du “Context”
+
+    4. Créer un composant pour changer la langue
+
+    5. Créer un composant pour afficher le contenu dans deux langues différentes
+
+    6. Créer le composant principal et rendre l'application
+-->
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: grey;
+            color: white;
+        }
+
+        #root {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: whitesmoke;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const LanguageContext = React.createContext();
+
+        function LanguageProvider({ children }) {
+            const [language, setLanguage] = React.useState('fr');
+
+            const toggleLanguage = () => {
+                setLanguage((prevLang) => (prevLang === 'fr' ? 'en' : 'fr'));
+            };
+
+            return (
+                <LanguageContext.Provider value={{ language, toggleLanguage }}>
+                    {children}
+                </LanguageContext.Provider>
+            );
+        }
+
+        // Changer la langue
+        function LanguageSwitcher() {
+            const { language, toggleLanguage } = React.useContext(LanguageContext);
+
+            return (
+                <button onClick={toggleLanguage} style={{ padding: '10px 20px', cursor: 'pointer' }}>
+                    {language === 'fr' ? 'Changer en Anglais' : 'Switch to French'}
+                </button>
+            );
+        }
+
+        // Afficher le contenu dans deux langues différentes
+        function Content() {
+            const { language } = React.useContext(LanguageContext);
+
+            return (
+                <div style={{ color:'back',marginTop: '20px' }}>
+                    {language === 'fr' ? (
+                        <p>Bienvenue sur notre site web !</p>
+                    ) : (
+                        <p>Welcome to our website!</p>
+                    )}
+                </div>
+            );
+        }
+
+        function App() {
+            return (
+                <LanguageProvider>
+                    <div style={{ color:'black',marginTop: '20px' }}>
+                        <h1>Multi-langue avec React Context</h1>
+                        <LanguageSwitcher />
+                        <Content />
+                    </div>
+                </LanguageProvider>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+
+</html>
