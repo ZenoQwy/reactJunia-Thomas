@@ -65,31 +65,33 @@
 
     <script type="text/babel">
         let name = 'Thomas';
-        const element1 = 
+        let rendering = 
+        
+            
+       
+
+        
+
+        
+
+        <>
             <div style={{color: 'red'}} className="container1">        
                 <h1>
                     {`Bienvenue à ${name}!`}
                 </h1>
                 {/* Affiche "Bienvenue à React!" */} 
             </div>
-        ;
 
-        const element2 =
             <div style={{color: 'green'}} className="container2">        
                 <p>
                     JSX permet d'utiliser des expressions JavaScript.
                 </p> 
             </div>
-        ;
+        </>;
 
-          
-        const element3 =   
-                element1 +
-                element2;
-    
+
                 
-        
-        ReactDOM.createRoot(document.getElementById('root')).render(element2);
+        ReactDOM.createRoot(document.getElementById('root')).render(rendering);
     </script>
 </body>
 

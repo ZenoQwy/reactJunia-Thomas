@@ -1,0 +1,90 @@
+<!--
+    1. Créez un fichier index.html qui inclut React, ReactDOM et Babel depuis un CDN.
+
+    2. Créer un composant WelcomeMessage :
+        ● Dans cette étape, vous allez créer un composant React appelé
+        WelcomeMessage qui prend en paramètre une name (nom) et affiche un
+        message de bienvenue personnalisé.
+        Explication :
+        ● WelcomeMessage est un composant fonctionnel qui reçoit des props
+        (propriétés) comme argument. Dans ce cas, il attend une propriété name et
+        l'affiche dans un élément <h1>.
+        ● props.name permet d'accéder à la valeur de name transmise au composant.
+        Rappel sur la création d’un composant :
+        function MonComposant(props) {
+        return <h1>Texte ….. {props.name}</h1>;
+        }
+
+    3. Créer un composant App
+        Pour “render” le composant App :
+        ReactDOM.render(<App />, document.getElementById('root'));
+
+    4. Utiliser WelcomeMessage dans le composant principal App :
+    Maintenant que nous avons créé le composant WelcomeMessage, nous allons
+    l'utiliser dans notre application principale pour afficher un message de bienvenue
+    pour deux utilisateurs.
+
+    5. Vérifier que vous avez bien :        
+        a. Bienvenue, [nom 1] !
+        b. Bienvenue, [nom 1] !
+-->
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+        }
+
+        #root {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script type="text/babel">
+        let name = 'Thomas';
+        let namee = 'Jean';
+
+        function WelcomeMessage(props) {
+            return <h1 style={{color: 'blue'}}>Bienvenue {props.name}</h1>;
+        }
+
+        function App() {
+            return (
+                <>
+                    <WelcomeMessage props={name}/> 
+                    <WelcomeMessage props1={namee}/> 
+                </>
+            )
+        }
+  
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+
+</html>
