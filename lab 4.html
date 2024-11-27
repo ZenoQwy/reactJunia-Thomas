@@ -1,0 +1,96 @@
+<!--
+    1. Créez un fichier index.html qui inclut React, ReactDOM, et
+    Babel depuis un CDN. Nous allons utiliser JSX, comme dans les
+    précédents labs, pour rendre des éléments dans le DOM.
+
+    2. Utilisez des expressions JS : Dans JSX, vous pouvez insérer des
+    expressions JavaScript en utilisant des accolades {}. Cela vous
+    permet de calculer des valeurs ou d'inclure des variables dans
+    votre rendu.
+
+    3. Utilisez des classes CSS dans JSX : ajouter une classe “container”
+    au div principal. (l'équivalent de l’attribut class en React ->
+    className)
+
+    4. Utilisez un fragment JSX pour englober l’élément div existant et un
+    nouvel élément div: Utilisation des fragments pour éviter les
+    éléments inutiles
+
+        ● Parfois, vous souhaitez retourner plusieurs éléments sans
+        ajouter de nœuds supplémentaires dans le DOM. Pour cela,
+        vous pouvez utiliser React Fragments. Les fragments vous
+        permettent de regrouper plusieurs éléments sans ajouter de
+        conteneur supplémentaire.
+        ● Vous pouvez utiliser un fragment avec <React.Fragment>
+        ou plus simplement en utilisant la syntaxe courte <>...</>.
+
+-->
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+        }
+
+        #root {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script type="text/babel">
+        let name = 'Thomas';
+        const element1 = 
+            <div style={{color: 'red'}} className="container1">        
+                <h1>
+                    {`Bienvenue à ${name}!`}
+                </h1>
+                {/* Affiche "Bienvenue à React!" */} 
+            </div>
+        ;
+
+        const element2 =
+            <div style={{color: 'green'}} className="container2">        
+                <p>
+                    JSX permet d'utiliser des expressions JavaScript.
+                </p> 
+            </div>
+        ;
+
+          
+        const element3 =   
+                element1 +
+                element2;
+    
+                
+        
+        ReactDOM.createRoot(document.getElementById('root')).render(element2);
+    </script>
+</body>
+
+</html>
