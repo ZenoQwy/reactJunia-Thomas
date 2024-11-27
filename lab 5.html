@@ -77,13 +77,13 @@
         function App() {
             return (
                 <>
-                    <WelcomeMessage props={name}/> 
-                    <WelcomeMessage props1={namee}/> 
+                    <WelcomeMessage name={name}/> 
+                    <WelcomeMessage name={namee}/> 
                 </>
             )
         }
   
-        ReactDOM.render(<App />, document.getElementById('root'));
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
 </body>
 
