@@ -1,0 +1,102 @@
+<!--
+    1. Créez un fichier index.html dans lequel vous allez intégrer les CDN pour React, ReactDOM, et
+    Babel.
+
+    2. Créer un composant App, ce dernier doit gérer l’état (users, loading, error), et utilise le hook
+    useEffect pour effectuer la requête fetch
+
+    3. L’endpoint à utiliser pour la requête fetch GET https://jsonplaceholder.typicode.com/users
+
+    4. Afficher les données retournées par l’endpoint, utilisez .map(...) pour itérer sur la liste des
+    users
+-->
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: grey;
+            color: white;
+        }
+
+        #root {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: whitesmoke;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        
+
+        function useFetch(url) {
+            const [données, setDonnées] = React.useState(null);
+            const [chargement, setChargement] = React.useState(true);
+            const [erreur, setErreur] =  React.useState(null);
+
+            React.useEffect(() => {
+                fetch(url)
+                .then((réponse) => réponse.json())
+                .then((données) => {
+                    setDonnées(données);
+                    setChargement(false);
+                })
+                .catch((erreur) => {
+                    setErreur(erreur);
+                    setChargement(false);
+                });
+            }, [url]);
+
+            return { données, chargement, erreur };
+        }
+
+        function AfficherDonnées() {
+            const { données, chargement, erreur } =  useFetch(' https://jsonplaceholder.typicode.com/users');
+
+            if (chargement) return <p>Chargement...</p>;
+            if (erreur) return <p>Erreur : {erreur.message}</p>;
+
+            return (
+                <div style={{ color:'black' }}>
+                <h1>Données récupérées :</h1>
+                <pre>{JSON.stringify(données, null, 2)}</pre>
+                </div>
+            );
+        }
+
+
+        function App() {
+            return (
+                <div>
+                    <AfficherDonnées />
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+
+</html>
